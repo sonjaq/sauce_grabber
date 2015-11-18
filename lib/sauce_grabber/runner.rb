@@ -21,12 +21,16 @@ module SauceGrabber
       go
     end
 
+    # Consider adding utility fields with chunk processing here
     def capabilities_array(browser_csv)
+      capabilities = SmarterCSV.process(browser_csv)
+      capabilities.each do |caps|
       
+      end
     end
 
     def urls_array(urls_csv)
-      
+      SmarterCSV.process(urls_csv)
     end
 
     def go

@@ -12,6 +12,7 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     slop (4.2.0)
+    smarter_csv (1.1.0)
     watir-webdriver (0.9.1)
       selenium-webdriver (>= 2.46.2)
     websocket (1.2.2)
@@ -21,6 +22,7 @@ PLATFORMS
 
 DEPENDENCIES
   slop (~> 4)
+  smarter_csv
   watir-webdriver
 
 BUNDLED WITH
