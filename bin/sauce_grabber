@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.push File.expand_path('../../lib/', __FILE__)
+
+require 'sauce_grabber/runner'
+
+unless ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
+  puts "SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are required.",
+       "See https://docs.saucelabs.com/tutorials/ruby/ and modify your environment as necessary."
+  exit(1)
+end
+
+SauceGrabber::Runner.new
