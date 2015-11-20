@@ -1,43 +1,49 @@
 module SauceGrabber
   class CapabilitiesFactory
 
-    attr_reader :browser, :capabilities,
-                :driver, :orientation, :os, :target, :version
+    attr_reader   :capabilities, :browser_label
 
     def initialize(req_browser)
       @capabilities =  build_browser(req_browser)
-      @browser = SauceBrowser.new(capabilities)
+      return @capabilities
     rescue => _
-      require "pry";binding.pry # temporary debug statment
-      SauceGrabber.logger.error "Configuration not available: #{req_browser}. Exiting."
-      exit 1
+      return nil
     end
 
     def build_browser(req_hash)
-      case req_hash.fetch("driver")
-      when "Android"
-        Browsers::Android.new(req_hash)
-      when "Appium"
-        Browsers::Appium.new(req_hash)
-      when "Chrome"
-        Browsers::Chrome.new(req_hash)
-      when "Firefox"
-        Browsers::Firefox.new(req_hash)
-      when "Internet Explorer"
-        Browsers::InternetExplorer.new(req_hash)
-      when "iPad"
-        Browsers::IPad.new(req_hash)
-      when "iPhone"
-        Browsers::IPhone.new(req_hash)
-      when "Safari"
-        Browsers::Safari.new(req_hash)
-      else
-        raise ArgumentError
+      caps = case req_hash[:browser_name]
+             when "Android"
+               Selenium::WebDriver::Remote::Capabilities.android
+             when "Appium"
+               Selenium::WebDriver::Remote::Capabilities.android
+             when "Chrome"
+               Selenium::WebDriver::Remote::Capabilities.chrome
+             when "Edge"
+               Selenium::WebDriver::Remote::Capabilities.edge
+             when "Firefox"
+               Selenium::WebDriver::Remote::Capabilities.firefox
+             when "Internet Explorer"
+               Selenium::WebDriver::Remote::Capabilities.internet_explorer
+             when "iPad"
+               Selenium::WebDriver::Remote::Capabilities.ipad
+             when "iPhone"
+               Selenium::WebDriver::Remote::Capabilities.iphone
+             when "Safari"
+               Selenium::WebDriver::Remote::Capabilities.safari
+             else e
+               raise ArgumentError
+             end
+
+      req_hash.each_pair do |key, value|
+        unless caps[:browser_name].downcase.match(value.to_s.downcase)
+          caps[key] = value.to_s
+        end
       end
+      caps
     end
     
-    def browser_label
-      @browser_builder.browser_label
+    def short_name(req_hash)
+      # Bad idea - need to move this maybe to runner or shooter?
     end
 
   end

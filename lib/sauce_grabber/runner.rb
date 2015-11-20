@@ -2,7 +2,7 @@ require 'sauce_grabber'
 
 module SauceGrabber
   class Runner
-    attr_accessor   :options, :browsers, :urls
+    attr_accessor   :options, :browsers, :urls, :current_browser
     
     def initialize
       opts = Slop.parse do |o|
@@ -24,8 +24,8 @@ module SauceGrabber
     # Consider adding utility fields with chunk processing here
     def capabilities_array(browser_csv)
       capabilities = SmarterCSV.process(browser_csv)
-      capabilities.each do |caps|
-      
+      capabilities.map do |caps|
+        CapabiltiesFactory.new(caps)
       end
     end
 
