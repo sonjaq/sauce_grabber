@@ -1,2 +1,4 @@
-browser,operating_system,version,ie_driver,
+browser_name,operating_system,version,ie_driver,
 "Chrome","Windows 10","45","",
+"Chrome","OS X 10.10","45","",
+"Edge","Windows 10",""
