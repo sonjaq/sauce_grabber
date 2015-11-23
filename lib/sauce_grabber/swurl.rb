@@ -12,7 +12,12 @@ module SauceGrabber
           shots = get_screenshots(@browser)
           shots.each_with_index { |s, i| 
             next if s == nil
-            File.open(url_to_path(u,i), 'wb') { |f| f.write(s)} 
+            destination = url_to_path(u,i)
+            while File.exists?(destination)
+              i += 1
+              destination = url_to_path(u,i)
+            end
+            File.open(destination, 'wb') { |f| f.write(s)} 
           }  
         end
 
@@ -63,7 +68,7 @@ module SauceGrabber
 
       def safe_filename(url)
         path = URI.parse(url).path
-        return "root" if path == ""
+        return "root" if path == ("" || "/")
         path.gsub(/(\/|\.)/, "-").chomp("-")
       end
 
