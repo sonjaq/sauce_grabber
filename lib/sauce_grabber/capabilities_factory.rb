@@ -7,7 +7,7 @@ module SauceGrabber
       @capabilities =  build_browser(req_browser)
       return @capabilities
     rescue => _
-      return nil
+      return ""
     end
 
     def build_browser(req_hash)
@@ -35,15 +35,10 @@ module SauceGrabber
              end
 
       req_hash.each_pair do |key, value|
-        unless caps[:browser_name].downcase.match(value.to_s.downcase)
-          caps[key] = value.to_s
-        end
+        next if key == caps[:browser_name]
+        caps[key] = value.to_s
       end
       caps
-    end
-    
-    def short_name(req_hash)
-      # Bad idea - need to move this maybe to runner or shooter?
     end
 
   end
