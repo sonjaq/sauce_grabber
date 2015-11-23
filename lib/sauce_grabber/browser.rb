@@ -33,7 +33,7 @@ module SauceGrabber
     end
 
     def browser_label
-      [name, os, version].join(" ")
+      [name.capitalize, version, os].join(" ")
     end
 
     def name
@@ -60,11 +60,11 @@ module SauceGrabber
     end
 
     def username
-      "andie_leaf" # ENV["SAUCE_USERNAME"]
+      ENV["SAUCE_USERNAME"]
     end
 
     def access_key
-      "a8267be8-1d39-455f-84e7-e6c9ffcf585a" #ENV["SAUCE_ACCESS_KEY"]
+      ENV["SAUCE_ACCESS_KEY"]
     end
 
   end
