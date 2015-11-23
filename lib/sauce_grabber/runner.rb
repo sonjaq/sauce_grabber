@@ -27,6 +27,9 @@ module SauceGrabber
       @options  = opts
       @browsers = capabilities_array(opts[:browsers_file] )
       @urls     = urls_array(opts[:urls_file] )
+      
+      Swurl.output_dir = options[:output_dir]
+      
       go
     end
 
@@ -52,7 +55,6 @@ module SauceGrabber
     end
 
     def go
-      Swurl.output_dir = options[:output_dir]
       browse_capabilities
     rescue => e
       errors.push(e)

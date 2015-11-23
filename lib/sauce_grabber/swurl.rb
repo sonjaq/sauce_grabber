@@ -71,7 +71,6 @@ module SauceGrabber
         # Returns [] of screenshots
         SauceGrabber::Shooter.shoot(browser)
       rescue => e
-        require "pry";binding.pry # temporary debug statment
         return []
       end
 
