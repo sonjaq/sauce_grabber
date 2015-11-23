@@ -10,6 +10,7 @@ module SauceGrabber
         o.string '-b', '--browsers-file', 'browser csv file (default: browsers.csv)', default: "browsers.csv"
         o.string '-u', '--urls-file', 'csv file of urls (default: urls.csv)', default: "urls.csv"
         o.string '-o', '--output-dir', 'Output directory', default: "screenshots"
+        o.bool '-t', '--tunnel', 'Sauce Connect tunnel has been enabled (default: false)', default: false
         o.on '--version', 'print the version' do
           puts "SauceGrabber #{SauceGrabber::VERSION}"
           exit
@@ -41,7 +42,7 @@ module SauceGrabber
       end
       capabilities = SmarterCSV.process(browser_csv,:convert_values_to_numeric => false)
       capabilities.map do |caps|
-        SauceGrabber::CapabilitiesFactory.new(caps)
+        SauceGrabber::CapabilitiesFactory.new(caps, options[:tunnel])
       end
       capabilities
     end

@@ -3,8 +3,9 @@ module SauceGrabber
 
     attr_reader   :capabilities, :browser_label
 
-    def initialize(req_browser)
+    def initialize(req_browser, tunnel)
       @capabilities =  build_browser(req_browser)
+      add_sc_info(@capabilities) if tunnel
       return @capabilities
     rescue => _
       return ""
@@ -38,7 +39,12 @@ module SauceGrabber
         next if key == caps[:browser_name]
         caps[key] = value.to_s
       end
+      add_sc_info(caps)
       caps
+    end
+
+    def add_sc_info(caps)
+      caps["parentTunnel"] = ENV['SAUCE_USERNAME']
     end
 
   end
