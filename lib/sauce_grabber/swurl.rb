@@ -9,6 +9,7 @@ module SauceGrabber
 
         urls.each do |u|
           @browser.goto(u[:url])
+          sleep(1) # To accommodate slow page load
           shots = get_screenshots(@browser)
           shots.each_with_index { |s, i| 
             next if s == nil
