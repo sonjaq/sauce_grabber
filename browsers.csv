@@ -1,4 +1,20 @@
-browser_name,operating_system,version,ie_driver,
-"Chrome","Windows 10","45","",
-"Chrome","OS X 10.10","45","",
-"Edge","Windows 10",""
+browser_name,operating_system,version,deviceName,deviceOrientation,platform
+safari,,8,,,OS X 10.10
+safari,,9,,,OS X 10.11
+chrome,,46,,,OS X 10.11
+firefox,,42,,,OS X 10.11
+internet explorer,Windows 7,9,,,
+internet explorer,Windows 7,10,,,
+internet explorer,Windows 7,11,,,
+internet explorer,Windows 7,8,,,
+internet explorer,Windows XP,8,,,
+internet explorer,Windows 10,11,,,
+internet explorer,Windows 8,10,,,
+internet explorer,Windows 8.1,11,,,
+MicrosoftEdge,Windows 10,20.1024,,,
+firefox,Windows 10,42,,,
+firefox,Windows XP,42,,,
+firefox,Windows 8.1,42,,,
+chrome,Windows 10,46,,,
+chrome,Windows 8.1,46,,,
+chrome,Windows 7,46,,,
