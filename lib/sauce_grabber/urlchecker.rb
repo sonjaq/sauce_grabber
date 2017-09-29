@@ -16,7 +16,7 @@ module SauceGrabber
 
       def checkurls()
         script = %q{var list, images = [], index;
-      list = document.querySelectorAll('.entry-article img');
+      list = document.querySelectorAll('img');
       for (index = 0; index < list.length; ++index) {
           if (list[index].naturalWidth == "undefined" || list[index].naturalWidth == 0) {
             images.push(list[index]);
