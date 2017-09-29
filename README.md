@@ -61,4 +61,4 @@ Some optional field/value examples:
 
 ### Questions?
 
-Ping me. avleaf@gmail.com
+Use the Issues link above.
