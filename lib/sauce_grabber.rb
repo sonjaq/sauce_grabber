@@ -8,6 +8,8 @@ require "sauce_grabber/capabilities_factory"
 require "sauce_grabber/browser"
 require "sauce_grabber/swurl"
 require "sauce_grabber/shooter"
+require "sauce_grabber/urlchecker"
 require "sauce_grabber/logger"
 require "sauce_grabber/version"
 
+require 'pry'

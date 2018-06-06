@@ -11,16 +11,28 @@ module SauceGrabber
           @browser.goto(u[:url])
           sleep(1) # To accommodate slow page load
           shots = get_screenshots(@browser)
-          shots.each_with_index { |s, i| 
+          shots.each_with_index { |s, i|
             next if s == nil
             destination = url_to_path(u,i)
             while File.exists?(destination)
               i += 1
               destination = url_to_path(u,i)
             end
-            File.open(destination, 'wb') { |f| f.write(s)} 
-          }  
+            File.open(destination, 'wb') { |f| f.write(s)}
+          }
+
+
+          empty_images = get_empty_images(@browser)
+
+          empty_images do |empty_image|
+            next if empty_image == nil
+            SauceGrabber.logger.error("broken image: #{empty_image.src}" )
+          end
         end
+
+
+
+
 
       rescue => e
         # quiet in case this fails
@@ -53,7 +65,7 @@ module SauceGrabber
 
       def prepare_filename(url,index)
         f = "#{url[:template]}-#{safe_filename(url[:url])}"
-        if index > 0 
+        if index > 0
           f +=  "-#{index}"
         end
         f + ".png"
@@ -76,6 +88,14 @@ module SauceGrabber
       def get_screenshots(browser)
         # Returns [] of screenshots
         SauceGrabber::Shooter.shoot(browser)
+      rescue => e
+        return []
+      end
+
+
+      def get_empty_images(browser)
+        # Returns [] of broken images
+        SauceGrabber::UrlChecker.check(browser)
       rescue => e
         return []
       end
